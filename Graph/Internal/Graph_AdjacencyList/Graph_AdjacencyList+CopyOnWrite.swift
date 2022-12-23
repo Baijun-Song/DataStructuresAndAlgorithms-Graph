@@ -16,12 +16,12 @@ extension Graph_AdjacencyList {
       let newVertex = _Vertex(value: vertex._value)
       reference[vertex] = newVertex
       
-      if let firstVertex = vertices.first?._storage {
+      if let firstVertex = vertices.first?.storage {
         if firstVertex === vertex {
           firstVertexCopy = Vertex(newVertex)
         }
       }
-      if let secondVertex = vertices.second?._storage {
+      if let secondVertex = vertices.second?.storage {
         if secondVertex === vertex {
           secondVertexCopy = Vertex(newVertex)
         }
@@ -31,8 +31,8 @@ extension Graph_AdjacencyList {
     for (vertex, edges) in _storage._adjacencies {
       var newEdges: [Edge] = []
       for edge in edges {
-        let sourceVertex = edge.sourceVertex._storage
-        let destinationVertex = edge.destinationVertex._storage
+        let sourceVertex = edge.sourceVertex.storage
+        let destinationVertex = edge.destinationVertex.storage
         let newEdge = Edge(
           sourceVertex: Vertex(reference[sourceVertex]!),
           destinationVertex: Vertex(reference[destinationVertex]!),

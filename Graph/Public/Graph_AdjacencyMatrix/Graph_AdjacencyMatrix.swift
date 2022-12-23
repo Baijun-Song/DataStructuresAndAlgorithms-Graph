@@ -52,8 +52,8 @@ extension Graph_AdjacencyMatrix: Graph {
     let sourceCopy = verticesCopy.first ?? sourceVertex
     let destinationCopy = verticesCopy.second ?? destinationVertex
     
-    let sourceIndex = sourceCopy._storage._index
-    let destinationIndex = destinationCopy._storage._index
+    let sourceIndex = sourceCopy.storage._index
+    let destinationIndex = destinationCopy.storage._index
     precondition(sourceIndex < _storage._vertices.count)
     precondition(destinationIndex < _storage._vertices.count)
     _storage._weights[sourceIndex][destinationIndex] = weight
@@ -61,7 +61,7 @@ extension Graph_AdjacencyMatrix: Graph {
   }
   
   public func edges(from sourceVertex: Vertex) -> [Edge] {
-    let sourceIndex = sourceVertex._storage._index
+    let sourceIndex = sourceVertex.storage._index
     precondition(sourceIndex < _storage._vertices.count)
     var result: [Edge] = []
     
@@ -85,8 +85,8 @@ extension Graph_AdjacencyMatrix: Graph {
     from sourceVertex: Vertex,
     to destinationVertex: Vertex
   ) -> Double? {
-    let sourceIndex = sourceVertex._storage._index
-    let destinationIndex = destinationVertex._storage._index
+    let sourceIndex = sourceVertex.storage._index
+    let destinationIndex = destinationVertex.storage._index
     precondition(sourceIndex < _storage._vertices.count)
     precondition(destinationIndex < _storage._vertices.count)
     let weight = _storage._weights[sourceIndex][destinationIndex]

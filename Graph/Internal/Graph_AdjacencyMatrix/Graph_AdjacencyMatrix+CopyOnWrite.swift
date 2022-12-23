@@ -17,12 +17,12 @@ extension Graph_AdjacencyMatrix {
         _Vertex(value: vertex._value, index: vertex._index)
       newVertices.append(newVertex)
       
-      if let firstVertex = vertices.first?._storage {
+      if let firstVertex = vertices.first?.storage {
         if firstVertex === vertex {
           firstVertexCopy = Vertex(newVertex)
         }
       }
-      if let secondVertex = vertices.second?._storage {
+      if let secondVertex = vertices.second?.storage {
         if secondVertex === vertex {
           secondVertexCopy = Vertex(newVertex)
         }

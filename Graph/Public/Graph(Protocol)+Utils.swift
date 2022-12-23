@@ -1,4 +1,5 @@
 extension Graph {
+  @inlinable @inline(__always)
   public mutating func addUndirectedEdge(
     from sourceVertex: Vertex,
     to destinationVertex: Vertex,
@@ -24,7 +25,7 @@ extension Graph where Vertex: Hashable {
   ) -> Int {
     var result = 0
     var visited = Set<Vertex>()
-    __numberOfPaths(
+    _numberOfPaths(
       from: source,
       to: destination,
       visited: &visited,
@@ -33,7 +34,7 @@ extension Graph where Vertex: Hashable {
     return result
   }
   
-  private func __numberOfPaths(
+  private func _numberOfPaths(
     from source: Vertex,
     to destination: Vertex,
     visited: inout Set<Vertex>,
@@ -45,7 +46,7 @@ extension Graph where Vertex: Hashable {
     } else {
       for edge in edges(from: source) {
         if !visited.contains(edge.destinationVertex) {
-          __numberOfPaths(
+          _numberOfPaths(
             from: edge.destinationVertex,
             to: destination,
             visited: &visited,
@@ -75,10 +76,10 @@ extension Graph where Vertex: Hashable {
   
   public func hasCycle(from startVertex: Vertex) -> Bool {
     var visited = Set<Vertex>()
-    return __hasCycle(from: startVertex, visited: &visited)
+    return _hasCycle(from: startVertex, visited: &visited)
   }
   
-  private func __hasCycle(
+  private func _hasCycle(
     from sourceVertex: Vertex,
     visited: inout Set<Vertex>
   ) -> Bool {
@@ -87,7 +88,7 @@ extension Graph where Vertex: Hashable {
       if visited.contains(edge.destinationVertex) {
         return true
       } else {
-        if __hasCycle(from: edge.destinationVertex, visited: &visited) {
+        if _hasCycle(from: edge.destinationVertex, visited: &visited) {
           return true
         }
       }

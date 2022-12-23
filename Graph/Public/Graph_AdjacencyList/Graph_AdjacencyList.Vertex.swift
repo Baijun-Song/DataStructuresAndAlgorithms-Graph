@@ -1,21 +1,21 @@
 extension Graph_AdjacencyList {
   public struct Vertex: Equatable, Hashable {
-    private weak var __weakVertexReference: _Vertex?
+    weak var _storage: _Vertex?
     
     init(_ vertex: _Vertex) {
-      __weakVertexReference = vertex
+      _storage = vertex
     }
     
-    var _storage: _Vertex {
-      guard let validVertex = __weakVertexReference else {
+    var storage: _Vertex {
+      guard let storage = _storage else {
         preconditionFailure()
       }
-      return validVertex
+      return storage
     }
     
     public var value: Element {
-      get { _storage._value }
-      set { _storage._value = newValue }
+      get { storage._value }
+      set { storage._value = newValue }
     }
   }
 }

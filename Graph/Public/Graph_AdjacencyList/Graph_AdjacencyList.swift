@@ -36,13 +36,13 @@ extension Graph_AdjacencyList: Graph {
       destinationVertex: destinationCopy,
       weight: weight
     )
-    let source = sourceCopy._storage
+    let source = sourceCopy.storage
     precondition(_storage._adjacencies.keys.contains(source))
     _storage._adjacencies[source]!.append(edge)
   }
   
   public func edges(from sourceVertex: Vertex) -> [Edge] {
-    let source = sourceVertex._storage
+    let source = sourceVertex.storage
     precondition(_storage._adjacencies.keys.contains(source))
     return _storage._adjacencies[source]!
   }

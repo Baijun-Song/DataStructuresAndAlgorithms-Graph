@@ -6,7 +6,7 @@ extension Graph where Vertex: Hashable {
     from startVertex: Vertex
   ) -> [Vertex] {
     var result: [Vertex] = []
-    var waiting = Queue_Stack<Vertex>()
+    var waiting = DoubleStackQueue<Vertex>()
     var visited = Set<Vertex>()
     waiting.enqueue(startVertex)
     
@@ -48,7 +48,7 @@ extension Graph where Vertex: Hashable {
   ) -> [Vertex] {
     var result: [Vertex] = []
     var visited = Set<Vertex>()
-    __depthFirstTraverse(
+    _depthFirstTraverse(
       from: startVertex,
       visited: &visited,
       result: &result
@@ -56,7 +56,7 @@ extension Graph where Vertex: Hashable {
     return result
   }
   
-  private func __depthFirstTraverse(
+  private func _depthFirstTraverse(
     from sourceVertex: Vertex,
     visited: inout Set<Vertex>,
     result: inout [Vertex]
@@ -65,7 +65,7 @@ extension Graph where Vertex: Hashable {
     result.append(sourceVertex)
     for edge in edges(from: sourceVertex) {
       if !visited.contains(edge.destinationVertex) {
-        __depthFirstTraverse(
+        _depthFirstTraverse(
           from: edge.destinationVertex,
           visited: &visited,
           result: &result
