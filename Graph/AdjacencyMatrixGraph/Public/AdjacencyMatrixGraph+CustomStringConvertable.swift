@@ -1,20 +1,27 @@
-extension Graph_AdjacencyMatrix: CustomStringConvertible {
+extension AdjacencyMatrixGraph: CustomStringConvertible {
   public var description: String {
-    let s1 = "Adjacency-Matrix-based Graph:\n"
-    let s2 = String(repeating: "-", count: 36) + "\n"
+    let s1 = "Adjacency Matrix Graph:\n"
+    let s2 = String(repeating: "-", count: 40) + "\n"
     let s3 = "Vertices:\n"
-    let s4 = "Weights Matrix:\n"
-    let s5 = "\n" + String(repeating: "-", count: 36)
+    let s4 = "Connections:\n"
+    let s5 = "\n" + String(repeating: "-", count: 40)
     
-    let verticesDescription = _storage._vertices
-      .map { "(\($0._index)): \($0._value)" }
+    let verticesDescription = storage.indexByNode
+      .map { (node, index) in
+        "(\(index)): \(node.value)"
+      }
       .joined(separator: "\n")
     
-    let weightsDescription = _storage._weights.map { row in
-      row.map { weight in
-        if let weight = weight {
-          return String(format: "%.1f", weight)
-        } else {
+    let weightsDescription = storage.connections.map { row in
+      row.map { connection in
+        switch connection {
+        case let .connected(weight):
+          if let weight = weight {
+            return String(format: "%.1f", weight)
+          } else {
+            return "???"
+          }
+        case .disconnected:
           return "ø"
         }
       }
@@ -27,12 +34,13 @@ extension Graph_AdjacencyMatrix: CustomStringConvertible {
     let columnWidth = maxWeightDescription + 2
     
     let a1 = String(repeating: " ", count: 5)
-    let a2 = _storage._vertices
-      .map {
-        "(\($0._index))".padding(
+    let a2 = storage.indexByNode
+      .map { (node, index) in
+        "(\(index))".padding(
           toLength: columnWidth,
           withPad: " ",
-          startingAt: 0)
+          startingAt: 0
+        )
       }
       .joined()
     let firstRowDescription = a1 + a2 + "\n\n"
